@@ -53,6 +53,13 @@ $sisenseMigrationTasks=@(
         dest="$migrationDirRoot\Program Files\Sisense\Infra\MongoDB";
         create_dest_dir=$true
     },
+    # copy GraphQL conf file
+    @{
+        action="copy-file";
+        src="$actualPFSisenseRoot\PrismWeb\ECMNext\GraphQL\src\config\default.yaml";
+        dest="$migrationDirRoot\Program Files\Sisense\PrismWeb\ECMNext\GraphQL\src\config";
+        create_dest_dir=$true
+    },
     # copy SSO configuration
     @{
         action="copy-file";
@@ -63,16 +70,31 @@ $sisenseMigrationTasks=@(
     # Stop ElastiCubes
     @{
         action="stop-elastiCube";
-        cubeName="Sample ECommerce"
+        cubeName="Sample ECommerce";
+        skip=$true
     },
     @{
         action="stop-elastiCube";
-        cubeName="Sample Healthcare"
+        cubeName="Sample Healthcare";
+        skip=$true
     },
     @{
         action="stop-elastiCube";
-        cubeName="Sample Lead Generation"
-    }
+        cubeName="Sample Lead Generation";
+        skip=$true
+    },
+    @{
+        action="stop-elastiCube";
+        cubeName="DEV - Analytics"
+    },
+    @{
+        action="stop-elastiCube";
+        cubeName="Dev - Legacy Reports"
+    },
+    @{
+        action="stop-elastiCube";
+        cubeName="DEV - Pathfinder - BI"
+    },
     # backup elasticCubes and archive to migration dir
     @{
         action="copy-dir-recursively";
@@ -80,9 +102,17 @@ $sisenseMigrationTasks=@(
         dest="$migrationDirRoot\ProgramData\Sisense\PrismServer\ElasticCubeData";
         create_dest_dir=$true;
         archive=$true;
+        skip=$true
+    },
+    # backup Sisense Repository
+    @{
+        action="copy-dir-recursively";
+        src="$actualSisenseProgramData\PrismWeb\Repository";
+        dest="$migrationDirRoot\ProgramData\Sisense\PrismWeb\";
+        create_dest_dir=$true;
         # skip=$true
     },
-    # backup Sisense Plugins
+    # backup Sisense plugins
     @{
         action="copy-dir-recursively";
         src="$actualPFSisenseRoot\PrismWeb\plugins";
@@ -93,15 +123,33 @@ $sisenseMigrationTasks=@(
     # start ElastiCubes
     @{
         action="start-elastiCube";
-        cubeName="Sample ECommerce"
+        cubeName="Sample ECommerce";
+        skip=$true
     },
     @{
         action="start-elastiCube";
-        cubeName="Sample Healthcare"
+        cubeName="Sample Healthcare";
+        skip=$true
     },
     @{
         action="start-elastiCube";
-        cubeName="Sample Lead Generation"
+        cubeName="Sample Lead Generation";
+        skip=$true
+    },
+    @{
+        action="start-elastiCube";
+        cubeName="DEV - Analytics";
+        skip=$true
+    },
+    @{
+        action="start-elastiCube";
+        cubeName="Dev - Legacy Reports";
+        skip=$true
+    },
+    @{
+        action="start-elastiCube";
+        cubeName="DEV - Pathfinder - BI";
+        skip=$true
     },
     @{
         action="manage-service";
@@ -116,7 +164,8 @@ $sisenseMigrationTasks=@(
     @{
         action="manage-service";
         serviceName="WAS";
-        serviceAction="start"
+        serviceAction="start";
+        skip=$true
     },
     @{
         action="manage-service";

@@ -9,15 +9,19 @@
 
 # Script starts here
 
-$migrationDirRoot = "c:\temp\sisenseMigration\run_2018-04-24-05-20-03"
+$migrationDirRoot = "c:\temp\sisenseMigration\run_2018-04-29-03-28-30"
 
 $actualProgramFiles = (Get-ChildItem Env:ProgramFiles).value
 $actualPFSisenseRoot = "$actualProgramFiles\Sisense"
 
 $actualSisenseProgramData = "c:\ProgramData\Sisense"
+# $actualSisenseProgramData = "D:\ProgramData\Sisense"
 
+#$targetSisenseProgramFilesRoot = "c:\Program Files\Sisense"
 $targetSisenseProgramFilesRoot = "c:\temp\targetProgramFiles\Sisense"
+
 $targetSisenseProgramDataRoot = "c:\temp\targetProgramData\Sisense"
+# $targetSisenseProgramDataRoot = "d:\ProgramData\Sisense"
 
 $sisenseMigrationTasks=@(
     @{
@@ -36,9 +40,16 @@ $sisenseMigrationTasks=@(
         serviceName="Sisense.Repository";
         serviceAction="stop"
     },
+    # replace ECMNext GraphQL default.yaml
     @{
         action="replace-file";
-        src="$migrationDirRoot\Program Files\Sisense\PrismWeb\vnext\config\default.yaml"
+        src="$migrationDirRoot\Program Files\Sisense\PrismWeb\ECMNext\GraphQL\src\config\default.yaml";
+        dest="$targetSisenseProgramFilesRoot\PrismWeb\ECMNext\GraphQL\src\config\default.yaml";
+        backup=$true
+    },
+    @{
+        action="replace-file";
+        src="$migrationDirRoot\Program Files\Sisense\PrismWeb\vnext\config\default.yaml";
         dest="$targetSisenseProgramFilesRoot\PrismWeb\vnext\config\default.yaml";
         backup=$true
     },
@@ -58,7 +69,7 @@ $sisenseMigrationTasks=@(
     @{
         action="copy-file";
         src="$migrationDirRoot\Program Files\Sisense\PrismWeb\LoginSisense.ashx";
-        dest="$targetSisenseProgramFilesRoot\PrismWeb\LoginSisense.ashx";
+        dest="$targetSisenseProgramFilesRoot\PrismWeb\";
         backup=$true
     },
     # Stop ElastiCubes
@@ -82,12 +93,21 @@ $sisenseMigrationTasks=@(
         action="unzip";
         src="$migrationDirRoot\ProgramData\Sisense\PrismServer\ElasticCubeData.zip";
         dest="$targetSisenseProgramDataRoot\PrismServer\";
+        skip=$true
     },
     # deploy archived Sisense Plugins from migration dir to target dir
     @{
         action="copy-dir-recursively";
         src="$migrationDirRoot\Program Files\Sisense\PrismWeb\plugins";
         dest="$targetSisenseProgramFilesRoot\PrismWeb\";
+    },
+    # deploy Sisense Repository
+    @{
+        action="copy-dir-recursively";
+        src="$migrationDirRoot\ProgramData\Sisense\PrismWeb\Repository";
+        dest="$targetSisenseProgramDataRoot\PrismWeb\";
+        create_dest_dir=$true;
+        # skip=$true
     },
     # start ElastiCubes
     @{
@@ -127,6 +147,6 @@ foreach($task in $sisenseMigrationTasks) {
     }
 }
 
-Tree $targetSisenseProgramFilesRoot /A /F
+# Tree $targetSisenseProgramFilesRoot /A /F
 
 # Tree $targetSisenseProgramDataRoot /A /F
