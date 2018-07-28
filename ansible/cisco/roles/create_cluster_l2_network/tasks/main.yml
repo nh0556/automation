@@ -1,0 +1,60 @@
+---
+# tasks file for create_cluster_l3_network
+- name: debug list cluster subnets to be configured
+  debug:
+    msg: "{{ item }}"
+  with_items: "{{ subnet_list }}"
+
+- name: enable feature interface-vlan
+  nxos_feature:
+    provider: "{{ n9k_list.coloNexus9K.provider }}"
+    feature: interface-vlan
+    state: enabled 
+
+- name: configure vlans
+  nxos_config:
+    provider: "{{ n9k_list.coloNexus9K.provider }}"
+    lines:
+        - name {{ item.name }}
+    parents: vlan {{ item.vlan }}
+  with_items: "{{ subnet_list }}"
+
+- name: configure svi interfaces
+  nxos_config:
+    provider: "{{ n9k_list.coloNexus9K.provider }}"
+    lines:
+        - description {{ item.name }}
+        - ip address {{ item.ip_address }}/24
+    parents: interface vlan {{ item.vlan }}
+  with_items: "{{ subnet_list }}"
+
+- name: configure switchports
+  nxos_config:
+    provider:  "{{ n9k_list.coloNexus9K.provider }}"
+    lines:
+        - switchport mode trunk
+        - switchport trunk allowed vlan {{ item.vlans }}
+    parents: interface {{ item.interface }}
+  with_items: "{{ l2_port_list }}"
+
+- name: "show vlans"
+  nxos_command:
+    provider: "{{ n9k_list.coloNexus9K.provider }}"
+    commands:
+        - show vlan brief
+  register: vlans_out
+
+- name: "debug vlans"
+  debug:
+    var: vlans_out.stdout_lines
+
+- name: "show interfaces"
+  nxos_command:
+    provider: "{{ n9k_list.coloNexus9K.provider }}"
+    commands:
+        - show interface brief
+  register: interfaces_out
+  
+- name: "debug interfaces_out"
+  debug:
+    var: interfaces_out.stdout_lines

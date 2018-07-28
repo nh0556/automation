@@ -1,0 +1,58 @@
+---
+# tasks file for create_cluster_l3_network
+#
+
+- name: "debug coloCSR"
+  debug:
+    var: csr_list.coloCSR
+
+- name: "About to configuring vrf"
+  debug:
+    msg: "vrf = {{ vrf_name }}"
+
+- name: "configure vrf"
+  ios_config:
+    provider: "{{ csr_list.coloCSR.provider }}"
+    lines:
+        - description {{ vrf_name }}
+        - address-family ipv4
+        - address-family ipv6
+    parents: vrf definition {{ vrf_name }}
+
+- name: debug list cluster subnets to be configured
+  debug:
+    msg: "{{ item }}"
+  with_items: "{{ subnet_list }}"
+
+- name: "configure cluster subnets as subinterfaces"
+  ios_config:
+    provider: "{{ csr_list.coloCSR.provider }}"
+    lines:
+        - ip address {{ item.ip_address }} {{ item.netmask }}
+        - description {{ item.name }}
+        - encapsulation dot1q {{ item.vlan }}
+        - vrf forwarding {{ vrf_name }}
+    parents: interface {{ csr_list.coloCSR.interface }}.{{item.vlan}}
+  with_items: "{{ subnet_list }}"
+
+- name: "show vrfs"
+  ios_command:
+    provider: "{{ csr_list.coloCSR.provider }}"
+    commands:
+        - show vrf
+  register: vrf_out
+
+- name: "debug vrfs"
+  debug:
+    var: vrf_out.stdout_lines
+
+- name: "show interfaces"
+  ios_command:
+    provider: "{{ csr_list.coloCSR.provider }}"
+    commands:
+        - show interface summary
+  register: interfaces_out
+  
+- name: "debug interfaces_out"
+  debug:
+    var: interfaces_out.stdout_lines

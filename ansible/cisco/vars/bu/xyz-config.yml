@@ -1,0 +1,31 @@
+---
+#########################################
+businessUnit: "XYZ"
+
+# format the vrf to be lower case
+vrf_name: "{{ businessUnit | lower }}"
+vrf_desc: "computer cluster"
+
+subnet_list:
+    - name: "web"
+      ip_address: "172.100.1.1"
+      netmask: "255.255.255.0"
+      vlan: 100
+    - name: "app"
+      ip_address: "172.101.1.1"
+      netmask: "255.255.255.0"
+      vlan: 101
+    - name: "storage"
+      ip_address: "172.102.1.1"
+      netmask: "255.255.255.0"
+      vlan: 102
+    
+l2_port_list:
+    - interface: Eth1/30
+      vlans: 100
+    - interface: Eth1/31
+      vlans: 101
+    - interface: Eth1/32
+      vlans: 102
+
+    

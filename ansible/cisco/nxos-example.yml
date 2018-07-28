@@ -1,0 +1,23 @@
+---
+- name: nxos-example
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  vars_prompt:
+
+    - name: bu
+      prompt: "business unit name, e.g. xyz"
+      private: no
+      when: bu not defined
+
+  vars_files:
+    - "{{ playbook_dir }}/vars/global-vars.yml"
+    - "{{ playbook_dir }}/vars/bu/{{ bu }}-config.yml"
+
+################################
+# Roles
+################################
+
+  roles:
+    - create_cluster_l2_network
