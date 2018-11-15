@@ -5,8 +5,8 @@
     commands:
       - "show interfaces description" 
     provider:
-      username: "{{ ANSIBLE_NET_USERNAME }}"
-      password: "{{ ANSIBLE_NET_PASSWORD }}"
+      username: "{{ USERNAME }}"
+      password: "{{ PASSWORD }}"
       host: "{{ host_ip }}"
 
 
