@@ -1,0 +1,12 @@
+---
+# tasks go here 
+- name: Show interfaces 
+  eos_command:
+    commands:
+      - "show interfaces description" 
+    provider:
+      username: {{ ansible_net_username }}
+      password: {{ ansible_net_password }}
+      host: {{ host_ip }}
+
+
