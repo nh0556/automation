@@ -5,8 +5,8 @@
     commands:
       - "show interfaces description" 
     provider:
-      username: {{ ansible_net_username }}
-      password: {{ ansible_net_password }}
-      host: {{ host_ip }}
+      username: "{{ ANSIBLE_NET_USERNAME }}"
+      password: "{{ ANSIBLE_NET_PASSWORD }}"
+      host: "{{ host_ip }}"
 
 
