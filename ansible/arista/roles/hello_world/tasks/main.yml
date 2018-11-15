@@ -5,8 +5,8 @@
     commands:
       - "show interfaces description" 
     provider:
-      username: "{{ lookup(env, 'ANSIBLE_NET_USERNAME' }}"
-      password: "{{ lookup(env, 'ANSIBLE_NET_PASSWORD' }}"
+      username: "{{ lookup(env, 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup(env, 'ANSIBLE_NET_PASSWORD') }}"
       host: "{{ host_ip }}"
 
 
