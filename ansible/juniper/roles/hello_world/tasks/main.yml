@@ -18,7 +18,7 @@
 - name: show configuration 
   junos_command:
     commands:
-      - "show configuration"
+      - "show configuration | display json"
     provider:
       username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
