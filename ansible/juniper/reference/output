@@ -1,0 +1,2224 @@
+
+PLAY [Hello world] ***********************************************************************************************************************************************************************
+
+TASK [hello_world : Show interfaces] *****************************************************************************************************************************************************
+ok: [R1]
+
+TASK [hello_world : Debug interface output] **********************************************************************************************************************************************
+ok: [R1] => {
+    "show_interface_output": {
+        "changed": false, 
+        "failed": false, 
+        "stdout": [
+            {
+                "interface-information": [
+                    {
+                        "physical-interface": [
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "172.16.1.1/24"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "multiservice"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "ge-0/0/0.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "vpls"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lc-0/0/0.32769"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "lc-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet6"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "pfe-0/0/0.16383"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pfe-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "pfh-0/0/0.16383"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "pfh-0/0/0.16384"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pfh-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "172.16.2.1/24"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "multiservice"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "ge-0/0/1.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/1"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/2"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/3"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/4"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/5"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/6"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/7"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "cbp0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "demux0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "dsc"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "10.0.0.4/8"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "128.0.0.1/2"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "128.0.0.4/2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet6"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "fe80::250:56ff:fea2:7327/64"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "fec0::a:0:0:4/64"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "tnp"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0x4"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "em1.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "em1"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "esi"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "100.123.1.0/16"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "fxp0.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "fxp0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "gre"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ipip"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "irb"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "128.0.0.127/2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "jsrv.1"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "jsrv"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-destination": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0/0"
+                                                            }
+                                                        ], 
+                                                        "ifa-local": [
+                                                            {
+                                                                "data": "127.0.0.1"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-destination": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0/0"
+                                                            }
+                                                        ], 
+                                                        "ifa-local": [
+                                                            {
+                                                                "data": "192.168.10.1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lo0.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-destination": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0/0"
+                                                            }
+                                                        ], 
+                                                        "ifa-local": [
+                                                            {
+                                                                "data": "127.0.0.1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lo0.16384"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lo0.16385"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "lo0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "lsi"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "mtun"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pimd"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pime"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pip0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pp0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "rbeb"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "tap"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "vtep"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ], 
+        "stdout_lines": [
+            {
+                "interface-information": [
+                    {
+                        "physical-interface": [
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "172.16.1.1/24"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "multiservice"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "ge-0/0/0.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "vpls"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lc-0/0/0.32769"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "lc-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet6"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "pfe-0/0/0.16383"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pfe-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "pfh-0/0/0.16383"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "pfh-0/0/0.16384"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pfh-0/0/0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "172.16.2.1/24"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "multiservice"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "ge-0/0/1.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/1"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/2"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/3"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/4"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/5"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/6"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ge-0/0/7"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "down"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "cbp0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "demux0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "dsc"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "10.0.0.4/8"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "128.0.0.1/2"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "128.0.0.4/2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet6"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "fe80::250:56ff:fea2:7327/64"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "fec0::a:0:0:4/64"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }, 
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "tnp"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0x4"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "em1.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "em1"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "esi"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "100.123.1.0/16"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "fxp0.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "fxp0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "gre"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "ipip"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "irb"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-local": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "128.0.0.127/2"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "jsrv.1"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "jsrv"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "logical-interface": [
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-destination": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0/0"
+                                                            }
+                                                        ], 
+                                                        "ifa-local": [
+                                                            {
+                                                                "data": "127.0.0.1"
+                                                            }
+                                                        ]
+                                                    }, 
+                                                    {
+                                                        "ifa-destination": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0/0"
+                                                            }
+                                                        ], 
+                                                        "ifa-local": [
+                                                            {
+                                                                "data": "192.168.10.1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lo0.0"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ], 
+                                                "interface-address": [
+                                                    {
+                                                        "ifa-destination": [
+                                                            {
+                                                                "attributes": {
+                                                                    "junos:emit": "emit"
+                                                                }, 
+                                                                "data": "0/0"
+                                                            }
+                                                        ], 
+                                                        "ifa-local": [
+                                                            {
+                                                                "data": "127.0.0.1"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lo0.16384"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "address-family": [
+                                            {
+                                                "address-family-name": [
+                                                    {
+                                                        "data": "inet"
+                                                    }
+                                                ]
+                                            }
+                                        ], 
+                                        "admin-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ], 
+                                        "filter-information": [
+                                            {}
+                                        ], 
+                                        "name": [
+                                            {
+                                                "data": "lo0.16385"
+                                            }
+                                        ], 
+                                        "oper-status": [
+                                            {
+                                                "data": "up"
+                                            }
+                                        ]
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "lo0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "lsi"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "mtun"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pimd"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pime"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pip0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "pp0"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "rbeb"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "tap"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }, 
+                            {
+                                "admin-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ], 
+                                "name": [
+                                    {
+                                        "data": "vtep"
+                                    }
+                                ], 
+                                "oper-status": [
+                                    {
+                                        "data": "up"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+TASK [hello_world : show policy-options] *************************************************************************************************************************************************
+An exception occurred during task execution. To see the full traceback, use -vvv. The error was: </rpc-error>
+fatal: [R1]: FAILED! => {"changed": false, "module_stderr": "Traceback (most recent call last):\n  File \"/tmp/ansible_tv1HGj/ansible_module_junos_command.py\", line 446, in <module>\n    main()\n  File \"/tmp/ansible_tv1HGj/ansible_module_junos_command.py\", line 394, in main\n    responses = rpc(module, items)\n  File \"/tmp/ansible_tv1HGj/ansible_module_junos_command.py\", line 236, in rpc\n    reply = exec_rpc(module, to_text(tostring(element), errors='surrogate_then_replace'), ignore_warning=False)\n  File \"/tmp/ansible_tv1HGj/ansible_modlib.zip/ansible/module_utils/network/common/netconf.py\", line 53, in exec_rpc\n  File \"/tmp/ansible_tv1HGj/ansible_modlib.zip/ansible/module_utils/network/common/netconf.py\", line 76, in __rpc__\n  File \"/tmp/ansible_tv1HGj/ansible_modlib.zip/ansible/module_utils/network/common/netconf.py\", line 105, in parse_rpc_error\nansible.module_utils.connection.ConnectionError: <?xml version=\"1.0\" encoding=\"UTF-8\"?><rpc-error xmlns=\"urn:ietf:params:xml:ns:netconf:base:1.0\" xmlns:junos=\"http://xml.juniper.net/junos/17.4R1/junos\" xmlns:nc=\"urn:ietf:params:xml:ns:netconf:base:1.0\">\n<error-type>protocol</error-type>\n<error-tag>operation-failed</error-tag>\n<error-severity>error</error-severity>\n<error-message>syntax error, expecting &lt;command&gt;</error-message>\n<error-info>\n<bad-element>policy-options</bad-element>\n</error-info>\n</rpc-error>\n\n", "module_stdout": "", "msg": "MODULE FAILURE", "rc": 1}
+	to retry, use: --limit @/home/jcluser/temp/automation/ansible/juniper/hello_world.retry
+
+PLAY RECAP *******************************************************************************************************************************************************************************
+R1                         : ok=2    changed=0    unreachable=0    failed=1   
+

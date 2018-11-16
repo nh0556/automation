@@ -1,0 +1,31 @@
+---
+# tasks go here 
+- name: Show interfaces 
+  junos_command:
+    commands:
+      - "show interfaces terse"
+    display: "json"
+    provider:
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+      host: "{{ host_ip }}"
+  register: show_interface_output
+
+- name: Debug interface output
+  debug:
+    var: show_interface_output
+
+- name: show policy-options 
+  junos_command:
+    commands:
+      - "show policy-options"
+    display: "json"
+    provider:
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+      host: "{{ host_ip }}"
+  register: show_policy_options_output
+
+- name: Debug  policy_options_output
+  debug:
+    var: show_policy_options_output
