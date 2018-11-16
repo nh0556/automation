@@ -15,17 +15,16 @@
   debug:
     var: show_interface_output
 
-- name: show policy-options 
+- name: show configuration 
   junos_command:
     commands:
-      - "show policy-options"
-    display: "json"
+      - "show configuration"
     provider:
       username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       host: "{{ host_ip }}"
-  register: show_policy_options_output
+  register: show_configuration_output
 
-- name: Debug  policy_options_output
+- name: Debug show_configuration_output 
   debug:
-    var: show_policy_options_output
+    var: show_configuration_output
