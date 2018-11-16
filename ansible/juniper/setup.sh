@@ -1,0 +1,3 @@
+export ANSIBLE_NET_USERNAME='jcluser'
+export ANSIBLE_NET_PASSWORD='Juniper!1'
+export ANSIBLE_HOST_KEY_CHECKING=False
