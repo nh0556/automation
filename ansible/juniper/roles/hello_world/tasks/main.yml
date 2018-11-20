@@ -43,3 +43,23 @@
 - name: debug config_output
   debug:
     var: config_output
+
+- name: set fact new cloud client config
+  set_fact:
+    new_cloud_client_config_file: "{{ playbook_dir }}/new_cloud_client_config"
+
+- name: generate config template
+  template:
+    src: "{{ role_path }}/templates/add_cloud_client.j2"
+    dest: "{{ new_cloud_client_config_file }}"
+  delegate_to: localhost
+
+- name: apply config template to vmx
+  junos_config:
+    src: "{{ new_cloud_client_config_file }}"
+    provider:
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+      host: "{{ host_ip }}"
+
+    
