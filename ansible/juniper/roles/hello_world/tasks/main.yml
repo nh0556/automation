@@ -18,7 +18,7 @@
 - name: show configuration 
   junos_command:
     commands:
-      - "show configuration | display json"
+      - "show configuration"
     provider:
       username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
@@ -28,3 +28,18 @@
 - name: Debug show_configuration_output 
   debug:
     var: show_configuration_output
+  when: show_config is defined
+
+- name: set description for interface ge-0/0/4
+  junos_config:
+    lines:
+      - set interfaces ge-0/0/4 unit 0 description "hello world"
+    provider:
+      username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+      password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+      host: "{{ host_ip }}"
+  register: config_output
+
+- name: debug config_output
+  debug:
+    var: config_output
