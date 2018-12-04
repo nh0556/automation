@@ -61,5 +61,7 @@
       username: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
       password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
       host: "{{ host_ip }}"
+    confirm_commit: no 
+    confirm: 0 
 
     
