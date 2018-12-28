@@ -9,3 +9,20 @@
 - name: print junos version
   debug:
     var: junos.version
+
+- name: test config preview
+  juniper_junos_config:
+    host: "{{ host_ip }}"
+    load: "set"
+    diff: true
+    commit: false
+    # retrieve: candidate
+    return_output: true
+    lines:
+      - 'set interfaces ge-0/0/4 unit 0 description "hello world"'
+  register: response
+
+- name: dump config preview response
+  debug:
+    # var: response.diff_lines
+    var: response
