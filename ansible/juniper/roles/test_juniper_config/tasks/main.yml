@@ -1,0 +1,11 @@
+---
+# tasks file for test_juniper_config
+
+- name: get device facts
+  juniper_junos_facts:
+    host: "{{ host_ip }}"
+    savedir: "{{ playbook_dir }}"
+
+- name: print junos version
+  debug:
+    var: junos.version

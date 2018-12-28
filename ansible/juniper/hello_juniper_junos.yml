@@ -13,16 +13,17 @@
 
   roles:
     - Juniper.junos
+    - test_juniper_config
 
 ################################
 # Tasks
 ################################
-  tasks:
-  
-    - name: get device facts
-      juniper_junos_facts:
-        host: "{{ host_ip }}"
-        savedir: "{{ playbook_dir }}"
-    - name: print junos version
-      debug:
-        var: junos.version
+#  tasks:
+#  
+#    - name: get device facts
+#      juniper_junos_facts:
+#        host: "{{ host_ip }}"
+#        savedir: "{{ playbook_dir }}"
+#    - name: print junos version
+#      debug:
+#        var: junos.version
