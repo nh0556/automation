@@ -10,17 +10,25 @@
   debug:
     var: junos.version
 
+- name: convert apply_config to boolean
+  set_fact:
+    apply_config: "{{ apply_config | bool }}"
+
+- name: dump apply_config
+  debug:
+    var: apply_config
+
 - name: test config preview
   juniper_junos_config:
     host: "{{ ansible_host }}"
     port: "{{ ansible_port }}"
     load: "set"
     diff: true
-    commit: false
+    commit: "{{ apply_config }}" 
     # retrieve: candidate
     return_output: true
     lines:
-      - 'set interfaces ge-0/0/4 unit 0 description "hello world"'
+      - 'set interfaces ge-0/0/4 unit 0 description "hello world again"'
   register: response
 
 - name: dump config preview response
