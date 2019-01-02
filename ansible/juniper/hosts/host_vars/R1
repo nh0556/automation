@@ -1,2 +1,5 @@
 ---
 host_ip: "100.123.1.0"
+ansible_port: 22
+ansible_host: 100.123.1.0
+
