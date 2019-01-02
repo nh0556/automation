@@ -12,7 +12,8 @@
 
 - name: test config preview
   juniper_junos_config:
-    host: "{{ host_ip }}"
+    host: "{{ ansible_host }}"
+    port: "{{ ansible_port }}"
     load: "set"
     diff: true
     commit: false
