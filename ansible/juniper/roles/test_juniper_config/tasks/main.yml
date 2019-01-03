@@ -14,7 +14,7 @@
     host: "{{ host_ip }}"
     savedir: "{{ playbook_dir }}"
 
-- name: print junos version
+- name: dump junos version
   debug:
     var: junos.version
   when: enable_debug
@@ -41,3 +41,34 @@
   debug:
     # var: response.diff_lines
     var: response
+
+- name: set configure_interface_file
+  set_fact:
+    configure_interface_file: "{{ playbook_dir }}/configure_interfaces_{{ ansible_host }}"
+
+- name: dump configure_interface_file
+  debug:
+    var: configure_interface_file
+  when: enable_debug
+
+- name: apply j2 template
+  template:
+    src: "{{ role_path }}/templates/configure_interfaces.j2"
+    dest: "{{ configure_interface_file }}"
+  delegate: localhost
+
+- name: apply the config interface template to the router
+  juniper_junos_config:
+    host: "{{ ansible_host }}"
+    port: "{{ ansible_port }}"
+    load: "set"
+    diff: true
+    commit: "{{ apply_config }}"
+    return_output: true
+    src: "{{ configure_interface_file }}"
+  register: set_response
+
+- name: dump config response
+  debug:
+    var: set_response
+...
