@@ -12,6 +12,7 @@
     - name: apply_config
       prompt: "apply the configuration to the devices (yes/no - don't apply apply)"
       private: no
+      default: "no"
    
 ################################
 # Roles
