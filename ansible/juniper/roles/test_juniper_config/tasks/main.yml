@@ -1,5 +1,13 @@
 ---
 # tasks file for test_juniper_config
+#
+- name: convert enable_debug to boolean
+  set_fact:
+    enable_debug: "{{ enable_debug | bool }}"
+
+- name: convert apply_config to boolean
+  set_fact:
+    apply_config: "{{ apply_config | bool }}"
 
 - name: get device facts
   juniper_junos_facts:
@@ -9,14 +17,12 @@
 - name: print junos version
   debug:
     var: junos.version
-
-- name: convert apply_config to boolean
-  set_fact:
-    apply_config: "{{ apply_config | bool }}"
+  when: enable_debug
 
 - name: dump apply_config
   debug:
     var: apply_config
+  when: enable_debug
 
 - name: test config preview
   juniper_junos_config:
