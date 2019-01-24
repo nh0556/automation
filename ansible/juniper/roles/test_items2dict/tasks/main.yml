@@ -1,0 +1,27 @@
+---
+# tasks file for test_items2dict
+- name: define test input fact development use only
+  set_fact:
+    test_gcp_networks_input: "{{ role_path }}/templates/sample_gcp_network_out.json"
+
+- name: load dev show config json file
+  set_fact:
+    gcp_network_out: "{{ lookup('file', test_gcp_networks_input) }}"
+
+- name: dump gcp_network_out
+  debug:
+    var: gcp_network_out.gcp_network_out['items']
+
+- name: transform gcp_network_out to a map
+  set_fact:
+    gcp_network_map: {}
+
+- name: transform gcp_networks_out to a dict
+  set_fact:
+    gcp_network_map: "{{ gcp_network_map | combine( { item.name : item}) }}"
+  with_items:  "{{ gcp_network_out.gcp_network_out['items'] }}"
+
+- name: dump gcp_network_map
+  debug:
+    var: gcp_network_map
+...

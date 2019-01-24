@@ -1,0 +1,30 @@
+---
+- name: test items2dict 
+  hosts: vlab 
+  connection: local
+  # become: False
+  gather_facts: False
+
+  # note order is important
+
+################################
+#Roles
+################################
+
+  roles:
+    - Juniper.junos
+    - test_items2dict
+
+################################
+# Tasks
+################################
+#  tasks:
+#  
+#    - name: get device facts
+#      juniper_junos_facts:
+#        host: "{{ host_ip }}"
+#        savedir: "{{ playbook_dir }}"
+#    - name: print junos version
+#      debug:
+#        var: junos.version
+...

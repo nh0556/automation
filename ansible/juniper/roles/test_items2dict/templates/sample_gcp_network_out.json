@@ -1,0 +1,82 @@
+{
+    "gcp_network_out": {
+        "failed": false,
+        "changed": false,
+        "items": [
+            {
+                "kind": "compute#network",
+                "name": "can-automation-test-gcp",
+                "subnetworks": [
+                    "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/regions/us-east4/subnetworks/can-automation-test-gcp-subnet-10-130-1-0"
+                ],
+                "autoCreateSubnetworks": false,
+                "routingConfig": {
+                    "routingMode": "REGIONAL"
+                },
+                "creationTimestamp": "2019-01-24T09:38:28.585-08:00",
+                "id": "2466534174792894203",
+                "selfLink": "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/global/networks/can-automation-test-gcp"
+            },
+            {
+                "kind": "compute#network",
+                "name": "can-neteng-documentation-test",
+                "subnetworks": [
+                    "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/regions/us-east4/subnetworks/subnet-10-130-3-0-24"
+                ],
+                "autoCreateSubnetworks": false,
+                "routingConfig": {
+                    "routingMode": "GLOBAL"
+                },
+                "creationTimestamp": "2018-12-23T21:29:21.605-08:00",
+                "id": "6549469178880708702",
+                "selfLink": "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/global/networks/can-neteng-documentation-test"
+            },
+            {
+                "kind": "compute#network",
+                "name": "can-vpc-iad0",
+                "subnetworks": [
+                    "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/regions/us-east4/subnetworks/can-vpc-iad0-subnet-neteng-test-2",
+                    "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/regions/us-east4/subnetworks/can-vpc-iad0-subnet-neteng-test"
+                ],
+                "autoCreateSubnetworks": false,
+                "routingConfig": {
+                    "routingMode": "REGIONAL"
+                },
+                "creationTimestamp": "2018-10-26T10:36:52.308-07:00",
+                "id": "1569562493091507803",
+                "selfLink": "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/global/networks/can-vpc-iad0"
+            },
+            {
+                "kind": "compute#network",
+                "name": "can-vpc-neteng-test-iad0",
+                "subnetworks": [
+                    "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/regions/us-east4/subnetworks/can-vpc-neteng-test-iad0-subnet"
+                ],
+                "autoCreateSubnetworks": false,
+                "routingConfig": {
+                    "routingMode": "REGIONAL"
+                },
+                "creationTimestamp": "2018-12-07T10:54:02.585-08:00",
+                "id": "6047185784545967909",
+                "selfLink": "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/global/networks/can-vpc-neteng-test-iad0"
+            },
+            {
+                "kind": "compute#network",
+                "name": "neteng-test-gcp",
+                "subnetworks": [
+                    "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/regions/us-east4/subnetworks/neteng-test-gcp-subnet-10-130-0-0"
+                ],
+                "autoCreateSubnetworks": false,
+                "routingConfig": {
+                    "routingMode": "REGIONAL"
+                },
+                "creationTimestamp": "2019-01-24T09:37:56.764-08:00",
+                "id": "3920022919612483867",
+                "selfLink": "https://www.googleapis.com/compute/v1/projects/can-neteng-gcp/global/networks/neteng-test-gcp"
+            }
+        ]
+    },
+    "changed": false,
+    "_ansible_verbose_always": true,
+    "_ansible_no_log": false
+}
