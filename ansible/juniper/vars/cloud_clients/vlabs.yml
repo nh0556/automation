@@ -1,0 +1,35 @@
+# Cloud peering/bgp configuration for site, iad0
+---
+aws_networks:
+  NETENG_TEST_DXGW:
+    description: "NETENG_TEST_DXGW"
+    network_prefixes:
+      - "10.129.0.0/24"
+    bgp_config:
+      as_number: 64567
+      authentication_key: "changeme!"
+    routers:
+      R1:
+#        interface: "{{ cloud_circuits.aws_shared.interface }}"
+        interface_ip: "169.254.96.1/30"
+        description: "NETENG_TEST_DXGW"
+        sub_interface: 200
+        mtu: 1500
+        peer_ip: "169.254.96.2/3"
+
+  NETENG_TEST_DXGW2:
+    description: "NETENG_TEST_DXGW2"
+    network_prefixes:
+      - "10.129.1.0/26"
+    bgp_config:
+      as_number: 64567
+      authentication_key: "changeme!"
+    routers:
+      R1:
+#        interface: "{{ cloud_circuits.aws_shared.interface }}"
+        interface_ip: "169.254.97.1/30"
+        description: "NETENG_TEST_DXGW2"
+        sub_interface: 200
+        mtu: 1500
+        peer_ip: "169.254.97.2/3"
+...

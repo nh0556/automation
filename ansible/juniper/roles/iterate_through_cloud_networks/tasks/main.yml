@@ -1,0 +1,28 @@
+---
+#- name: include cloud_clients vlabs.yml vars
+#  include_vars:
+#    file: "{{ playbook_dir }}/vars/cloud_clients/vlabs.yml"
+#    name: "cloud_networks"
+#
+#- name: include cloud_clients gcp_networks.yml vars
+#  include_vars:
+#    file: "{{ playbook_dir }}/vars/cloud_clients/gcp_networks.yml"
+#    name: "cloud_networks"
+- name: define cloud_networks
+  set_fact:
+    cloud_networks: {}
+
+- name: combine aws_networks into cloud_networks
+  set_fact:
+    cloud_networks: "{{ cloud_networks | combine(aws_networks, recursive=true) }}"
+
+- name: combine gcp_networks into cloud_networks
+  set_fact:
+    cloud_networks: "{{ cloud_networks | combine(gcp_networks, recursive=true) }}"
+
+# tasks file for iterate_through_cloud_networks
+- name: iterate through cloud_clients and see if one var file overwrote the other
+  debug:
+    msg: "cloud client name: {{ item.key }} ==> {{ item.value }}"
+  loop: "{{ cloud_networks | dict2items }}"
+...
