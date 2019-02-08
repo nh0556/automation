@@ -1,0 +1,10 @@
+---
+# tasks file for get_aws_vpcs
+- name: invoke aws cli to retrieve vpcs
+  shell: "aws ec2 describe-vpcs"
+  register: aws_get_vpcs_out
+
+- name: dump aws vpcs
+  debug:
+    var: aws_get_vpcs_out
+...
