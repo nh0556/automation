@@ -1,0 +1,10 @@
+---
+# tasks file for test_redis
+- name: testing reading key from redis db
+  set_fact:
+    redis_key_value: "{{ lookup('redis','iad0',port=6379) }}"
+- name: dump redis_key_value
+  debug:
+    var: item
+  loop: "{{ redis_key_value['routers'] }}"
+...  
