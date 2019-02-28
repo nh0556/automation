@@ -2,7 +2,15 @@
 # tasks file for get_aws_vpcs
 - name: invoke aws cli to retrieve vpcs
   shell: "aws ec2 describe-vpcs"
+  environment:
+    # AWS_ACCESS_KEY_ID: 'access-key-goes here'
+    # AWS_SECRET_ACCESS_KEY: 'secret-access-key-goes here'
+    AWS_DEFAULT_REGION: 'us-west-1'
   register: aws_get_vpcs_out
+
+- name: dump aws_get_vpcs_out
+  debug:
+    var: aws_get_vpcs_out
 
 - name: reformat aws_get_vpcs_out to json fact
   set_fact:
@@ -11,4 +19,9 @@
 - name: dump aws vpcs
   debug:
     var: list_of_vpcs 
+
+- name: dump just the vpc-ids
+  debug:
+    var: item.VpcId
+  loop: "{{ list_of_vpcs.Vpcs }}"
 ...
