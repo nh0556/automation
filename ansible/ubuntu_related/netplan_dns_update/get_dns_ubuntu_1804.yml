@@ -1,0 +1,52 @@
+---
+    - name: fetch netplan files
+      find:
+        path: /etc/netplan
+      register: netplan_files
+
+    - name: iterate through netplan files
+      debug:
+        msg: "{{ host_os_version }}, netplan file = {{ item.path }}"
+      with_items: "{{ netplan_files.files }}"
+
+#    - name: read in vars from netplan file
+#      include_vars:
+#        file: "{{ item.path }}"
+#        name: netplan_config
+#      loop: "{{ netplan_files.files }}"
+
+#    - name: read in vars /etc/netplan 
+#      include_vars:
+#        dir: /etc/netplan 
+#        name: netplan_config
+
+#    - name: dump the file contents
+#      debug:
+#        var: netplan_config.network
+
+    - name: define list of netplan files holder
+      set_fact:
+        netplan_files_list: []
+
+    - name: iterate and combine into netplan_files_list
+      set_fact:
+        netplan_files_list: "{{ netplan_files_list + [ item.path ] }}"
+      with_items: "{{ netplan_files.files }}"
+
+#    - name: dump netplan_files_list
+#      debug:
+#        var: netplan_files_list
+
+    - name: define a lookup var for all the netplan config
+      set_fact:
+        netplan_config_map: {}
+
+    - name: combine multiple file contents into netplan_config_map
+      set_fact:
+        netplan_config_map: "{{ netplan_config_map | combine( item | from_yaml, recursive=true) }}" 
+      with_file: "{{ netplan_files_list }}"
+
+    - name: dump netplan_config_map
+      debug:
+        var: netplan_config_map
+...

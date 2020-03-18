@@ -1,0 +1,28 @@
+---
+- name: Get dns config from hosts 
+  hosts: localhost
+  connection: local
+  gather_facts: True
+    
+  tasks:
+    - name: detect the OS version 
+      set_fact:
+        host_os_version: "{{ hostvars[inventory_hostname].ansible_distribution_version }}"
+
+    - name: dump the os version of the host
+      debug:
+        var: host_os_version
+
+    - name: include ubuntu_1804 dns handling tasks
+      include_tasks: get_dns_ubuntu_1804.yml
+      when: host_os_version == "18.04"
+
+    - name: include ubuntu_1604 dns handling tasks
+      include_tasks: get_dns_ubuntu_1604.yml
+      when: host_os_version == "16.04"
+...
+
+
+  
+
+              

@@ -1,0 +1,9 @@
+---
+  - name: retreive etc/resolv.conf contents
+    set_fact:
+      etc_resolv_conf: "{{ lookup('file','/etc/resolv.conf') }}"
+
+   - name: Ubuntu 16.04 - dump etc_resolv_conf
+     debug:
+      msg: "{{ etc_resolv_conf }}"
+...
