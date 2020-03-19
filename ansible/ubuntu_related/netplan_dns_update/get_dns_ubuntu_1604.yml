@@ -1,9 +1,10 @@
 ---
-  - name: retreive etc/resolv.conf contents
-    set_fact:
-      etc_resolv_conf: "{{ lookup('file','/etc/resolv.conf') }}"
+  - name: slurp netplan_files_list
+    slurp:
+      src: "/etc/resolv.conf"
+    register: etc_resolv_conf_file 
 
-   - name: Ubuntu 16.04 - dump etc_resolv_conf
-     debug:
-      msg: "{{ etc_resolv_conf }}"
+  - name: Ubuntu 16.04 - dump etc_resolv_conf
+    debug:
+      msg: "{{ etc_resolv_conf_file.content | b64decode }}"
 ...
