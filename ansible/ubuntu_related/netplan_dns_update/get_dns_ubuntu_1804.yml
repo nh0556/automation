@@ -37,7 +37,7 @@
       debug:
         var: netplan_files_list
 
-    # pertains to controller case 
+    # pertains to controller case
     # - name: define a lookup var for all the netplan config
     #  set_fact:
     #    netplan_config_map: {}
@@ -45,7 +45,7 @@
     # only works on controller
     # - name: combine multiple file contents into netplan_config_map
     #  set_fact:
-    #    netplan_config_map: "{{ netplan_config_map | combine( item | from_yaml, recursive=true) }}" 
+    #    netplan_config_map: "{{ netplan_config_map | combine( item | from_yaml, recursive=true) }}"
     #  with_file: "{{ netplan_files_list }}"
 
     # only works on controller
