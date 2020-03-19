@@ -33,20 +33,36 @@
         netplan_files_list: "{{ netplan_files_list + [ item.path ] }}"
       with_items: "{{ netplan_files.files }}"
 
-#    - name: dump netplan_files_list
-#      debug:
-#        var: netplan_files_list
+    - name: dump netplan_files_list
+      debug:
+        var: netplan_files_list
 
-    - name: define a lookup var for all the netplan config
-      set_fact:
-        netplan_config_map: {}
+    # pertains to controller case 
+    # - name: define a lookup var for all the netplan config
+    #  set_fact:
+    #    netplan_config_map: {}
 
-    - name: combine multiple file contents into netplan_config_map
+    # only works on controller
+    # - name: combine multiple file contents into netplan_config_map
+    #  set_fact:
+    #    netplan_config_map: "{{ netplan_config_map | combine( item | from_yaml, recursive=true) }}" 
+    #  with_file: "{{ netplan_files_list }}"
+
+    # only works on controller
+    #- name: dump netplan_config_map
+    #  debug:
+    #    var: netplan_config_map
+
+    - name: slurp netplan_files_list
+      slurp:
+        src: "{{ netplan_files_list[0] }}"
+      register: netplan_config_file
+
+    - name: conver the slurped netplan file to a ansible fact
       set_fact:
-        netplan_config_map: "{{ netplan_config_map | combine( item | from_yaml, recursive=true) }}" 
-      with_file: "{{ netplan_files_list }}"
+        netplan_config: "{{ netplan_config_file.content | b64decode | from_yaml }}"
 
     - name: dump netplan_config_map
       debug:
-        var: netplan_config_map
+        var: netplan_config
 ...
