@@ -1,0 +1,43 @@
+---
+- name: sample-netplan dns update using lineinfile 
+  hosts: localhost
+#  connection: local
+  gather_facts: True
+#  vars:
+#     net_plan_file: "/home/vagrant/nh_automation/ansible/ubuntu_related/netplan_dns_update/99-netcfg-vmware.yaml"
+#     contents: "{{ lookup('file', '{{ net_plan_file }}') }}"
+  vars:
+    new_dns_servers:
+      - 17.7.7.7
+      - 17.8.8.8
+    # ubuntu 18.04
+    new_dns_config:
+      network:
+        ethernets:
+          ens160:
+            nameservers:
+              # addresses: ['17.7.7.7', '17.8.8.8']
+              addresses:  "{{ new_dns_servers }}"
+    
+  tasks:
+    - name: detect the OS version
+      set_fact:
+        host_os_version: "{{ hostvars[inventory_hostname].ansible_distribution_version }}"
+
+    - name: dump the os version of the host
+      debug:
+        var: host_os_version
+
+    - name: include ubuntu_1804 dns handling tasks
+      include_tasks: update_dns_ubuntu_1804.yml
+      when: host_os_version == "18.04"
+
+    - name: include ubuntu_1604 dns handling tasks
+      include_tasks: update_dns_ubuntu_1604.yml
+      when: host_os_version == "16.04"
+...
+
+
+  
+
+              

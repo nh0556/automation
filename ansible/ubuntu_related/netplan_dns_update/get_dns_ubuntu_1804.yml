@@ -28,6 +28,7 @@
       set_fact:
         netplan_files_list: []
 
+
     - name: iterate and combine into netplan_files_list
       set_fact:
         netplan_files_list: "{{ netplan_files_list + [ item.path ] }}"

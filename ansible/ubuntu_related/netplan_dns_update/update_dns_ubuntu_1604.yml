@@ -1,0 +1,16 @@
+---
+  - name: Starting ubuntu 16.04 dns update tasks
+    debug:
+      var: host_os_version
+
+  - name: backup etc/resolve.conf
+    debug:
+        msg: "backup etc/resolve.conf"
+
+  - name: check that /etc/resolv.conf exists
+    stat:
+      path: /etc/resolv.conf
+    register: resolv_out
+
+  
+...

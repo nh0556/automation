@@ -1,0 +1,125 @@
+---
+#    - name: Test whether netplan file is present
+#      stat:
+#        path: "/home/vagrant/nh_automation/ansible/ubuntu_related/netplan_dns_update/99-netcfg-vmware.yaml"
+#      register: stat_out 
+
+#    - name: dump stat output
+#      debug:
+#        var: stat_out.stat.exists
+
+#    - name: dump stat output
+#      debug:
+#        var: stat_out.stat
+
+    - name: fetch netplan files
+      find:
+        path: /etc/netplan
+      register: netplan_files
+
+    - name: dump netplan_files
+      debug:
+        var: netplan_files
+
+#    - name: define the list of netplan files fact
+#      set_fact:
+#        netplan_files_list: []
+
+    - name: dump netplan_files.files path one by one
+      debug:
+        msg: "{{ item.path }}"
+      with_items: "{{ netplan_files.files }}"
+
+#    - name: dump netplan_files_list
+#      debug:
+#        msg: "{{ netplan_files_list }}"
+
+    # - name: define the list of netplan files fact
+    #  set_fact:
+    #    netplan_files_list: []
+
+    #- name: iterate through retrieved list of netplan files and combine into netplan_files_list
+    #  set_fact:
+    #    netplan_files_list: "{{ netplan_files_list + [ item.path ] }}"
+    #  with_items: "{{ netplan_files.files }}"
+
+#    - name: dump parsed list of netplan_files_list
+#      debug:
+#        msg: "file : {{ item }}"
+#      with_items: "{{ netplan_files_list }}"
+
+    # no good, only works on controller
+    #- name: read in vars from netplan file
+    #  include_vars:
+    #    file: "/home/vagrant/nh_automation/ansible/ubuntu_related/netplan_dns_update/99-netcfg-vmware.yaml"
+    #    name: netplan_config
+
+    - name: dump new dns_servers to be applied to the old config
+      debug:
+        msg: "{{ new_dns_config }}"
+
+    #- name: dump the file contents
+    #  debug:
+    #    var: netplan_config.network
+    
+    # !!! important !!! right now i'm assuming only 1 netplan-file!
+    - name: slurp netplan_files_list
+      slurp:
+        src: "{{ netplan_files.files[1].path }}"
+      register: netplan_config_file
+
+    - name: backup the original netplan file
+      debug:
+        msg: "This is where the original netplan file is backed up"
+
+    - name: copy the original netplan file to backup dir
+      copy:
+        src: "{{ netplan_files.files[1].path }}"
+        dest: "/root/{{ netplan_files.files[1].path | basename }}.{{ ansible_date_time.epoch }}"
+      become: true
+      become_user: root
+
+    - name: convert the slurped netplan file to a ansible fact
+      set_fact:
+        netplan_config: "{{ netplan_config_file.content | b64decode | from_yaml }}"
+
+    - name: dump the converted netplan_config read from the host
+      debug:
+        msg: "{{ netplan_config }}"
+
+    - name: define network_intfs
+      set_fact:
+        interfaces: []
+
+    # - name: dump the interfaces configured in the netplan_config
+    - name: aggregate the interfaces configured in the netplan_config
+      # debug: 
+      #   msg: "{{ item.key }}"
+      set_fact:
+        interfaces: "{{ interfaces + [ item.key ] }}"
+      with_dict: "{{ netplan_config.network.ethernets }}"
+
+    - name: dump the interfaces list
+      debug:
+        var: interfaces
+
+    - name: identify interface config that has the dns servers configured on it
+      set_fact:
+        target_intf: "{{ item }}" 
+      when:
+        - netplan_config.network.ethernets[item].nameservers is defined
+      with_items: "{{ interfaces }}"
+
+    - name: revise netplan_config
+      set_fact:
+        netplan_config: "{{ netplan_config | combine( { 'network': { 'ethernets': { target_intf:  { 'nameservers': { 'addresses': new_dns_servers } } } } }, recursive=true) }}"
+
+    - name: dump the proposed updated netplan_config 
+      debug:
+        var: netplan_config
+        
+    - name: write out a new netplan file
+      template:
+        src: empty_netplan.j2
+        dest: new_netplan.yaml
+...
