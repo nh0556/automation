@@ -1,0 +1,66 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: web-drupal
+  labels:
+    app: "web-drupal"
+    nfsmount: dna-drupal-shared-files
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 50Gi
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /nfs_server/Shared_Files/dna/dev/files
+    server: 10.225.204.4
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: dna-drupal-src
+  labels:
+    app: "web-drupal"
+    nfsmount: dna-drupal-src
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /mnt/nfs_dna
+    server: 10.225.204.62
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: web-drupal-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: "web-drupal"
+      nfsmount: dna-drupal-shared-files
+  resources:
+    requests:
+      storage: 50Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: dna-drupal-src-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: "web-drupal"
+      nfsmount: dna-drupal-src
+  resources:
+    requests:
+      storage: 1Gi

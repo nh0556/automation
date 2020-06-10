@@ -1,0 +1,44 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web-drupal 
+  labels:
+    app: web-drupal 
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: web-drupal 
+    spec:
+      containers:
+        - image: pbpr-registry.apple.com/container/web:0.8 
+          name: drupal 
+          ports:
+            - containerPort: 80
+              name: drupal-http 
+            - containerPort: 443 
+              name: drupal-https
+          volumeMounts:
+            - mountPath: /var/www/dna
+              name: sitecode
+            - mountPath: /var/www/dna/files
+              name: sharedfiles
+          env:
+            - name: app_name
+              value: "dna"
+            - name: app_env
+              value: "dev"
+            - name: site
+              value: "dna"
+            - name: release
+              value: "develop"
+      volumes:
+        - name: sitecode 
+          persistentVolumeClaim:
+            claimName: dna-drupal-src-pvc 
+        - name: sharedfiles 
+          persistentVolumeClaim:
+            claimName: web-drupal-pvc 
