@@ -1,0 +1,18 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: web-drupal-shared-files
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  selector:
+    matchLabels:
+      app: "dna"
+      appenv: dev
+      apptype: drupal
+      nfsmount: dna-drupal-shared-files
+  resources:
+    requests:
+      storage: 50Gi

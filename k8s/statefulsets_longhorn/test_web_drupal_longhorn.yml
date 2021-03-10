@@ -1,0 +1,117 @@
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: drupal-app
+#  labels:
+#      app: web-drupal
+#  spec:
+#    ports:
+#      - port: 80
+#        name: web
+#    clusterIP: None
+#    selector:
+#      app: nginx
+# ---
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: drupal-app 
+  labels:
+    app: web-drupal 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-drupal 
+  template:
+    metadata:
+      labels:
+        app: web-drupal 
+    spec:
+      securityContext:
+        fsGroup: 2010
+      containers:
+        - image: pbpr-registry.apple.com/container/web:0.9 
+          name: drupal 
+          ports:
+            - containerPort: 80
+              name: drupal-http 
+            - containerPort: 443 
+              name: drupal-https
+          volumeMounts:
+            - name: sitecode-vol
+              mountPath: /var/www/dna
+            - name: settings 
+              mountPath: "/var/www/dna/settings/"
+          env:
+            - name: app_name
+              value: "dna"
+            - name: app_env
+              value: "dev"
+            - name: site
+              value: "dna"
+            - name: release
+              value: "develop"
+
+        - image: pbpr-registry.apple.com/container/web:0.9 
+          name: deploy 
+          ports: []
+          volumeMounts:
+            - name: sitecode-vol
+              mountPath: /var/www/dna
+            - name: deploy-key-vol
+              mountPath: "/var/deploy_key"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 2010
+          env: []
+      initContainers:
+        - name: set-deploy-key
+          image: pbpr-registry.apple.com/container/web:0.9
+          command:
+            - "sh"
+            - "-c"
+            - "cp /var/root_deploy_key/* /var/deploy_key && chown -R deploy.deploy /var/deploy_key"
+          volumeMounts:
+            - mountPath: /var/root_deploy_key
+              name: root-deploy-key
+            - mountPath: /var/deploy_key
+              name: deploy-key-vol
+
+        - name: set-deploy-settings
+          image: pbpr-registry.apple.com/container/web:0.9
+          command:
+            - "sh"
+            - "-c"
+            - "cp /var/root_deploy_env/* /var/deploy_env && chown -R deploy.www-data /var/deploy_env"
+          volumeMounts:
+            - mountPath: /var/root_deploy_env
+              name: root-deploy-env
+            - mountPath: /var/deploy_env
+              name: settings 
+   volumeClaimTemplates:
+    - metadata:
+      name: sitecode-vol             
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: longhorn 
+          
+   volumes:
+        - name: root-deploy-env
+          configMap:
+            name: web-drupal
+            defaultMode: 0640
+        - name: deploy-key-vol
+          emptyDir:
+            sizeLimit: "1M" 
+        - name: settings 
+          emptyDir:
+            sizeLimit: "2M" 
+        - name: root-deploy-key
+          secret:
+            secretName: sample-nh-secret 
+            defaultMode: 0600

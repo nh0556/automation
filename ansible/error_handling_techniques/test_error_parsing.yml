@@ -1,0 +1,39 @@
+---
+- name: testing error parsing simulated stderr 
+  hosts: localhost
+  vars:
+    eblaster_msg: [
+        " [notice] Starting execution of dblog_cron().",
+        " [notice] Starting execution of field_cron(), execution of dblog_cron() took 15.1ms.",
+        " [notice] Starting execution of file_cron(), execution of field_cron() took 2.08ms.",
+        " [notice] Starting execution of system_cron(), execution of file_cron() took 21.84ms.",
+        " [notice] Execution of system_cron() took 21.81ms.",
+        " [notice] Cron run completed.",
+        "sendmail: fatal: noreply@apple.com(33): No recipient addresses found in message header",
+        "postdrop: warning: stdin: unexpected EOF in data, record type 78 length 958",
+        "postdrop: fatal: uid=33: malformed input",
+        " [error]  Error sending email (from intern_reminders@apple.com to  with reply-to intern_reminders@apple.com). ",
+        " [info] Undefined index: email_name EmailQueueWorker.php:176",
+        " [error]  Drupal\\apple_email\\Exception\\UnableToSendEmailException: There was an error while trying to send an <em class=\"placeholder\"></em> email using <a href=\"/email-template/13\"><em class=\"placeholder\">Intern End Date Notification</em></a> to <em class=\"placeholder\"></em>. in Drupal\\apple_email\\Plugin\\QueueWorker\\EmailQueueWorker->processItem() (line 176 of /var/www/eblaster/releases/2.0.2/web/modules/apple/apple_email/src/Plugin/QueueWorker/EmailQueueWorker.php)."
+    ]
+  tasks:
+    - name: dump eblaster_msg
+      debug:
+        var: eblaster_msg
+
+    - name: define eblaster_err_out
+      set_fact:
+        eblaster_err_out: []
+
+    - name: dump eblaster_output_lines 
+      set_fact:
+        eblaster_err_out: "{{ eblaster_err_out + [ item ] }}"
+      loop: "{{ eblaster_msg }}"
+#      when: '"[warning]" in item'
+      when: '"[error]" in item'
+
+    - name: fail when error detected
+      fail:
+        msg: "drush command failed!\n{{ eblaster_err_out }}"
+      when: 'eblaster_err_out | length | int > 0'
+...

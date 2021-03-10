@@ -1,0 +1,19 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: web-drupal-shared-files
+  labels:
+    app: "dna"
+    appenv: dev
+    apptype: drupal
+    nfsmount: dna-drupal-shared-files
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 50Gi
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: /nfs_server/Shared_Files/dna/dev/files
+    server: 10.225.204.4

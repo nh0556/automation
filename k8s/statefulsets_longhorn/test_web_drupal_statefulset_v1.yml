@@ -1,0 +1,132 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-app
+  labels:
+    app: dna 
+    appenv: dev
+    apptype: drupal
+    repo: kaleidoscope
+    component: frontend
+      
+spec:
+  ports:
+    - port: 80
+      name: http
+    - port: 443
+      name: https
+  clusterIP: None
+  selector:
+    app: dna 
+---
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: drupal-app 
+  labels:
+    app: dna 
+    appenv: dev
+    apptype: drupal
+    repo: kaleidoscope
+    component: frontend
+spec:
+  serviceName: drupal-app
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dna 
+  template:
+    metadata:
+      labels:
+        app: dna 
+        appenv: dev
+        apptype: drupal
+        repo: kaleidoscope
+        component: frontend
+    spec:
+      securityContext:
+        fsGroup: 2010
+      containers:
+        - image: pbpr-registry.apple.com/container/web:0.9 
+          name: drupal 
+          ports:
+            - containerPort: 80
+              name: drupal-http 
+            - containerPort: 443 
+              name: drupal-https
+          volumeMounts:
+            - name: sitecode-vol
+              mountPath: /var/www/dna
+            - name: environment-settings
+              mountPath: /var/www/dna/settings/
+            - name: sharedfiles
+              mountPath: /var/www/dna/files
+          env:
+            - name: app_name
+              value: "dna"
+            - name: app_env
+              value: "dev"
+            - name: site
+              value: "dna"
+            - name: release
+              value: "develop"
+
+        - image: pbpr-registry.apple.com/container/web:0.9 
+          name: deploy 
+          ports: []
+          volumeMounts:
+            - name: sitecode-vol
+              mountPath: /var/www/dna
+#            - name: deploy-key-vol
+#              mountPath: "/var/deploy_key"
+            - name: deploy-key
+              mountPath: "/var/root_deploy_key"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 2010
+          env: []
+
+#      initContainers:
+#        - name: set-deploy-key
+#          image: pbpr-registry.apple.com/container/web:0.9
+#          command:
+#            - "sh"
+#            - "-c"
+#            - "cp /var/root_deploy_key/* /var/deploy_key && chown -R deploy.deploy /var/deploy_key"
+#          volumeMounts:
+#            - mountPath: /var/root_deploy_key
+#              name: root-deploy-key
+#            - mountPath: /var/deploy_key
+#              name: deploy-key-vol
+
+      volumes:
+        # The kaleidoscope key
+        - name: deploy-key
+          secret:
+            secretName: sample-nh-secret 
+            defaultMode: 0600
+        # dna settings
+        - name: environment-settings
+          configMap:
+            name: web-drupal
+            defaultMode: 0640  
+
+        # shared files
+        - name: sharedfiles
+          persistentVolumeClaim:
+            claimName: web-drupal-shared-files
+
+#        - name: deploy-key-vol
+#          emptyDir:
+#            sizeLimit: "1M" 
+
+  volumeClaimTemplates:
+    - metadata:
+        name: sitecode-vol             
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 2Gi
+        storageClassName: longhorn 
