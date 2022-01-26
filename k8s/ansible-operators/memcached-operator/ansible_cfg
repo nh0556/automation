@@ -1,0 +1,6 @@
+[defaults]
+roles_path = /opt/ansible/roles
+#library = /usr/share/ansible/openshift
+#library = /usr/local/lib/python3.8/site-packages
+interpreter_python=/usr/bin/python3
+COLLECTIONS_PATH=./.ansible/collections
