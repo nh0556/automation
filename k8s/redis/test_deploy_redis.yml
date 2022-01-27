@@ -1,0 +1,73 @@
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  strategy: debug
+#  debugger: always
+  vars:
+    dyn_inventory_group: redis_pods
+    app_name: redis
+    k8s_container_engine: "kubectl"
+  tasks:
+    - name: starting redis test deploy 
+      debug:
+        msg: "group: {{ dyn_inventory_group }}, app_name: {{ app_name }}, k8s_container_engine: {{ k8s_container_engine }}"
+    - name: retrieve the red pod matching the selector criteria
+      k8s_info:
+        api_version: v1
+        kind: Pod
+        #namespace: "{{ customized_hostname }}"
+        label_selectors:
+          - "app={{ app_name }}"
+      register: k8s_obj_info
+
+    - name: define a list of pods found
+      set_fact:
+        my_pods: []
+
+    - name: aggregate the list of pods found 
+      set_fact:
+        my_pods: "{{ my_pods + [ item.metadata.name ] }}"
+      loop: "{{ k8s_obj_info.resources | list }}"
+      loop_control:
+        label: "{{ item.metadata.name }}"
+
+    - name: dump the pods found
+      debug:
+        var: my_pods
+
+    - name: Add the container to the inventory scoped by namespace and pod 
+      add_host:
+        hostname: '{{ item }}-redis'
+        groups:
+          - "{{ dyn_inventory_group }}"
+        ansible_connection: '{{ k8s_container_engine }}'
+        ansible_user: root
+        ansible_python_interpreter: /usr/bin/python3
+        app_name: "{{ app_name }}"
+        ansible_kubectl_namespace: default 
+        ansible_kubectl_pod: "{{ item }}"
+        # ansible_kubectl_container: "{{ app_type }}"
+        redis_travis_ci: true
+      loop: "{{ my_pods }}"
+
+- hosts: redis_pods
+  tasks:
+    - name: dump hostname
+      command: "lsb_release -a"
+
+    - name: invoke davidwittman.redis role for installing redis 
+      include_role:
+        name: davidwittman.redis
+      vars:
+        redis_application_name: "nh_test"
+        # redis_version: "5.0.7"
+        redis_install_dir: "/opt/redis_5.0.14"
+        redis_version: "5.0.14"
+        redis_port: 6379 
+        redis_service_name: "redis_6379"
+        redis_appendonly: "yes"
+        redis_password: "password"
+        redis_save:
+          - '""' 
+        redis_maxmemory: "1gb"
+        redis_maxmemory_policy: "allkeys-lfu"
