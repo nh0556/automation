@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "{{'test'|a_filter}}"
+
+    - name: Print a message
+      debug:
+        msg: "{{'test'|another_filter('the','filters')}}"
+
+    - name: define a list
+      set_fact:
+        servers:
+          - "pdt-rno-np-redis01"
+          - "pdt-rno-np-redis02"
+          - "pdt-rno-np-redis03"
+
+    - name: test filter with a list input
+      debug:
+        msg: "{{ 'test' | c_filter(servers) }}"
+
